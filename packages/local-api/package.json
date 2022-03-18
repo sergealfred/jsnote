@@ -1,0 +1,32 @@
+{
+  "name": "@jsnote-serge/local-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "tsc --watch --preserveWatchOutput",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@jsnote-serge/local-client": "^0.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "http-proxy-middleware": "^2.0.2"
+  },
+  "gitHead": "e97b93d421efd6c8ee7157d6263ac19d2393113d"
+}
