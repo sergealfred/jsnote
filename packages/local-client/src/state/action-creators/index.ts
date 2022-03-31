@@ -8,6 +8,7 @@ import {
   InsertCellAfterAction,
   Direction,
   Action,
+  InsertCellPlaceholderAction,
 } from "../actions";
 import { Cell, CellTypes } from "../cell";
 import bundle from "../../bundler";
@@ -34,6 +35,12 @@ export const moveCell = (id: string, direction: Direction): MoveCellAction => {
       id,
       direction,
     },
+  };
+};
+
+export const insertCellPlaceholder = (): InsertCellPlaceholderAction => {
+  return {
+    type: ActionType.INSERT_CELL_PLACEHOLDER,
   };
 };
 
@@ -76,10 +83,17 @@ export const fetchCells = () => async (dispatch: Dispatch<Action>) => {
   try {
     const { data }: { data: Cell[] } = await axios.get("/cells");
 
-    dispatch({
-      type: ActionType.FETCH_CELLS_COMPLETE,
-      payload: data,
-    });
+    if (data.length !== 0) {
+      dispatch({
+        type: ActionType.FETCH_CELLS_COMPLETE,
+        payload: data,
+      });
+    } else {
+      console.log("IPH");
+      dispatch({
+        type: ActionType.INSERT_CELL_PLACEHOLDER,
+      });
+    }
   } catch (err: any) {
     dispatch({
       type: ActionType.FETCH_CELLS_ERROR,

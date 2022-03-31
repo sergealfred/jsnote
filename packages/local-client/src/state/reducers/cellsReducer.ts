@@ -44,6 +44,17 @@ const reducer = produce((state: CellState = initialState, action: Action) => {
       state.order[targetIndex] = action.payload.id;
 
       return state;
+    case ActionType.INSERT_CELL_PLACEHOLDER:
+      const placeholder: Cell = {
+        content:
+          'JBook\n\nThis is an interactive coding environment. You can write Javascript, see it executed, and write comprehensive documentation using markdown.\n\n- Click any text cell(including this one) to edit it\n- The code in each editor is all joined together into one file. If you define a variable in cell #1, you can refer it in any following cell!\n- You can show any React component, string, number, or anything else by calling the <span style="color:yellow">show</span> function. This is a function build into this environment. Call show multiple tomes to show multiple values\n- Re-order or delete cells using the buttons on the top right\n- Add new cells by hovering on the divider between each cell\n\nAll of your changes get saved to the file you opened JBook with. So if you ran <span style="color:yellow">npx jbook-serge serve test.js</span>, all of the text and code you write will be saved to the <span style="color:yellow">test.js</span> file',
+        type: "text",
+        id: randomId(),
+      };
+      state.data[placeholder.id] = placeholder;
+      state.order.unshift(placeholder.id);
+
+      return state;
     case ActionType.INSERT_CELL_AFTER:
       const cell: Cell = {
         content: "",
@@ -74,6 +85,7 @@ const reducer = produce((state: CellState = initialState, action: Action) => {
       return state;
     case ActionType.FETCH_CELLS_COMPLETE:
       state.order = action.payload.map((cell) => cell.id);
+
       state.data = action.payload.reduce((acc, cell) => {
         acc[cell.id] = cell;
         return acc;

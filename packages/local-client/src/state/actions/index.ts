@@ -11,6 +11,10 @@ export interface MoveCellAction {
   };
 }
 
+export interface InsertCellPlaceholderAction {
+  type: ActionType.INSERT_CELL_PLACEHOLDER;
+}
+
 export interface DeleteCellAction {
   type: ActionType.DELETE_CELL;
   payload: string;
@@ -79,4 +83,5 @@ export type Action =
   | FetchCellsAction
   | FetchCellsCompleteAction
   | FetchCellsErrorAction
-  | SaveCellsErrorAction;
+  | SaveCellsErrorAction
+  | InsertCellPlaceholderAction;
