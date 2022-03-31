@@ -89,7 +89,6 @@ export const fetchCells = () => async (dispatch: Dispatch<Action>) => {
         payload: data,
       });
     } else {
-      console.log("IPH");
       dispatch({
         type: ActionType.INSERT_CELL_PLACEHOLDER,
       });
